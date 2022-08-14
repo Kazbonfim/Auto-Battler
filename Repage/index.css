@@ -1,0 +1,188 @@
+    
+    @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300&family=Roboto:wght@300&family=Silkscreen&display=swap');
+
+    * {
+        padding: 1px;
+        font-family: 'Roboto', 'Silkscreen', 'Red Hat Display', sans-serif;
+    
+    }
+
+    body {
+        background:#FFF;
+        background-color: #e5e5f7;
+        background-image:  linear-gradient(grey 1px, transparent 0px), linear-gradient(to right, grey 1px, #e5e5f7 1px);
+        background-size: 20px 20px;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+    #navbar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    #menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+        padding: 5px;
+
+    }
+
+    #menu button {
+        font-family: 'Silkscreen';
+        font-size: 16px;
+        height: 50px;
+        width: 120px;
+        border: 0px solid grey;
+    }
+
+    #menu button:hover {
+        transition: 0.3s;
+        background: orangered;
+        color: white;
+    }
+
+    #menu button:disabled {
+        transition: 0.1s;
+        background: grey;
+        color: black;
+        -webkit-box-shadow: inset -2px 3px 35px 5px rgba(0,0,0,0.6); 
+        box-shadow: inset -2px 3px 35px 5px rgb(83, 82, 82);
+    }
+
+    .nextPage {
+        background: greenyellow;
+        color: white;
+    }
+
+    .nextPage button:hover {
+        transition: 0.3s;
+        background: green;
+        color: white;
+    }
+
+
+    #screen {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border: 1px solid white;
+        border-radius: 5px;
+        height: 400px;  
+        background: linear-gradient(rgba(255, 255, 255, 0.900), rgba(155, 196, 223, 0.900));
+    }
+
+    #overflow {
+        border: 1px solid white;
+        background: linear-gradient(black, rgb(26, 26, 26));
+        box-shadow: 0px 0px 50px 20px rgba(0,0,0,0.1);
+        width: 500px;
+        height: 400px;
+        overflow: scroll;
+        scroll-behavior: smooth;
+    }
+
+        #overflow::-webkit-scrollbar {
+            width:10px;
+        }
+
+        #overflow::-webkit-scrollbar-thumb {
+            width: 25px;
+            background-color: grey;
+            border-radius: 10px;
+        }
+
+        #overflow::-webkit-scrollbar-corner {
+            display: none;
+        }
+
+    #log {
+        text-align: center;
+        color: white;
+        margin-left: 20px;
+    }
+
+    #playerpet img{   
+        width: 80px;
+    }
+
+    #enemypet img {
+        width: 80px;
+    }
+
+
+    @keyframes floater {
+    50%{transform: translateY(-20%);transition: ease 0.2s;}
+    50%{transform: translateY(20%);transition: ease 0.2s;}
+  }
+
+  .float-area{
+    height:100vh;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .floating-img{
+    transform: translateY(-10%);
+    animation: floater 1.5s infinite;
+    transition: ease 0.1s;
+    width: 20px;
+    height:20px;
+  }
+
+    .Victory {
+        animation: floater 3s infinite;
+        font-size: 30px;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        text-shadow: 3px 2px 2px #464543d1;
+    }
+
+    .Loss {
+        animation: floater 3s infinite;
+        font-size: 25px;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        text-shadow: 3px 2px 2px #be0f03d1;
+    }
+
+    .Critical {
+        font-family: 'Red Hat Display';
+        color: #FFF;
+        font-size: 20px;
+        animation: 1.5s anim-popoutin ease;
+        text-align: center;
+    }
+
+@keyframes anim-popoutin {
+  0% {
+    color: black;
+    transform: scale(0);
+    opacity: 0;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  25% {
+    color: red;
+    transform: scale(2);
+    opacity: 1;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    color: rgb(255, 5, 5);
+    transform: scale(1);
+    opacity: 1;
+    text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    /* animate nothing to add pause at the end of animation */
+    color: #FFF;
+    transform: scale(1);
+    opacity: 1;
+    text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
