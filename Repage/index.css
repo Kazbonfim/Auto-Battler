@@ -10,7 +10,7 @@
     body {
         background:#FFF;
         background-color: #e5e5f7;
-        background-image:  linear-gradient(grey 1px, transparent 0px), linear-gradient(to right, grey 1px, #e5e5f7 1px);
+        background-image:  linear-gradient(rgba(128, 128, 128, 0.200) 1px, transparent 0px), linear-gradient(to right, #80808033 1px, #e5e5f759 1px);
         background-size: 20px 20px;
     }
 
@@ -19,7 +19,7 @@
     #navbar {
         display: flex;
         justify-content: center;
-        margin-bottom: 10px;
+        margin-bottom: -30px;
     }
 
     #menu {
@@ -36,17 +36,20 @@
         height: 50px;
         width: 120px;
         border: 0px solid grey;
+        border-top: 5px solid orange;
     }
 
     #menu button:hover {
         transition: 0.3s;
         background: orangered;
+        border-top: 5px solid white;
         color: white;
     }
 
     #menu button:disabled {
         transition: 0.1s;
         background: grey;
+        border-top: 5px solid grey;
         color: black;
         -webkit-box-shadow: inset -2px 3px 35px 5px rgba(0,0,0,0.6); 
         box-shadow: inset -2px 3px 35px 5px rgb(83, 82, 82);
@@ -71,12 +74,12 @@
         border: 1px solid white;
         border-radius: 5px;
         height: 400px;  
-        background: linear-gradient(rgba(255, 255, 255, 0.900), rgba(155, 196, 223, 0.900));
+        background: linear-gradient(rgba(255, 255, 255, 0.900), rgba(65, 70, 73, 0.9));
     }
 
     #overflow {
         border: 1px solid white;
-        background: linear-gradient(black, rgb(26, 26, 26));
+        background: linear-gradient(#84ad8b, rgb(26, 26, 26));
         box-shadow: 0px 0px 50px 20px rgba(0,0,0,0.1);
         width: 500px;
         height: 400px;
@@ -106,17 +109,45 @@
 
     #playerpet img{   
         width: 80px;
-    }
+        }
 
     #enemypet img {
         width: 80px;
+        }
+
+    .wiggleimg {
+        animation: wiggle 0.8s;
     }
+
+    @keyframes wiggle {
+        0%, 7% {
+          transform: rotateZ(0);
+        }
+        15% {
+          transform: rotateZ(-15deg);
+        }
+        20% {
+          transform: rotateZ(10deg);
+        }
+        25% {
+          transform: rotateZ(-10deg);
+        }
+        30% {
+          transform: rotateZ(6deg);
+        }
+        35% {
+          transform: rotateZ(-4deg);
+        }
+        40%, 100% {
+          transform: rotateZ(0);
+        }
+        }
 
 
     @keyframes floater {
     50%{transform: translateY(-20%);transition: ease 0.2s;}
     50%{transform: translateY(20%);transition: ease 0.2s;}
-  }
+        }
 
   .float-area{
     height:100vh;
@@ -124,7 +155,7 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
-  }
+        }
   
   .floating-img{
     transform: translateY(-10%);
@@ -132,7 +163,7 @@
     transition: ease 0.1s;
     width: 20px;
     height:20px;
-  }
+        }
 
     .Victory {
         animation: floater 3s infinite;
@@ -140,7 +171,7 @@
         text-align: center;
         color: rgb(255, 255, 255);
         text-shadow: 3px 2px 2px #464543d1;
-    }
+        }
 
     .Loss {
         animation: floater 3s infinite;
@@ -148,15 +179,15 @@
         text-align: center;
         color: rgb(255, 255, 255);
         text-shadow: 3px 2px 2px #be0f03d1;
-    }
+        }
 
-    .Critical {
-        font-family: 'Red Hat Display';
+    .Critical { 
+        font-family: 'Silkscreen';
         color: #FFF;
         font-size: 20px;
         animation: 1.5s anim-popoutin ease;
         text-align: center;
-    }
+        }
 
 @keyframes anim-popoutin {
   0% {

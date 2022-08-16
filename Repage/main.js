@@ -1,30 +1,30 @@
 // Main script refatorado, v4
 
-console.log('Para ver o Debug de seu personagem escreva `console.table([playerObject],[playerObject.hp])`, e para ver de seu oponente `console.table([enemyObject],[enemyObject.hp])')
+console.log(`Para ver o Debug de seu personagem escreva 'console.table([playerObject],[playerObject.hp])', e para ver de seu oponente 'console.table([enemyObject],[enemyObject.hp])'`)
 
 playerObject = {
-    name: 'Dottomonsutā',
-    hp: 100,
+    name: 'Dottomonsuta',
+    hp: 500,
     attack: 10,
     defense: 8,
-    luck: 5,
+    luck: 2,
     state: true,
     exp: 0,
     nextLevel: 150
 }
 
 enemyObject = {
-    name: 'Dottomonsutā',
-    hp: 100,
+    name: 'Dottomonsuta',
+    hp: 500,
     attack: 10,
     defense: 8,
-    luck: 5,
+    luck: 2,
     state: true,
     exp: 0,
     nextLevel: 150
 }
 
-// Sounds section.
+//Sounds functions.
     function soundHit1() {
         const hit01 = new Audio('./sound/ahit_001.wav')
         hit01.play()
@@ -59,8 +59,7 @@ enemyObject = {
         const misses = new Audio('./sound/miss.wav')
         misses.play()
     }
-
-// End.
+//End.
 
 const start = document.getElementById('Battle');
 start.addEventListener("click", init);
@@ -70,8 +69,25 @@ resting.addEventListener('click', rest);
 
 myTimer = ''
 
-// Log notes...
+// Animations
+function enemyHurts() {
+    const enemy = document.getElementById('enemypet');
+    enemy.classList.add('wiggleimg'), setTimeout(function() {
+        enemy.classList.remove('wiggleimg')
+    }, 600)
+}
+
+function playerHurts() {
+    const player = document.getElementById('playerpet');
+    player.classList.add('wiggleimg'), setTimeout(function() {
+        player.classList.remove('wiggleimg')
+    }, 600)
+}
+//End.
+
+//Log notes
 function playerNormalHit(damage){
+    enemyHurts()
     soundHit1()
     const element = document.getElementById('log')
     const node = document.createElement('p')
@@ -81,6 +97,7 @@ function playerNormalHit(damage){
 };
 
 function playerCriticalHit(damage, critical){
+    enemyHurts()
     soundCritical()
     const element = document.getElementById('log')
     const node = document.createElement('p')
@@ -91,6 +108,7 @@ function playerCriticalHit(damage, critical){
 }
 
 function enemyNormalHit(damage){
+    playerHurts()
     soundHit2()
     const element = document.getElementById('log')
     const node = document.createElement('p')
@@ -101,10 +119,11 @@ function enemyNormalHit(damage){
 }
 
 function enemyCriticalHit(damage, critical){
+    playerHurts()
     soundCritical()
     const element = document.getElementById('log')
     const node = document.createElement('p')
-    node.classList.add('Critical')
+    node.classList.add('Critical')  
     const textnode = document.createTextNode(`Seu ${playerObject.name} recebeu dano crítico! ${damage + critical}`)
     node.appendChild(textnode)
     element.appendChild(node), node.appendChild(textnode)
@@ -128,6 +147,7 @@ function playerWins(experience){
 
     const nextOnClick = document.getElementById('nextPage')
     nextOnClick.onclick = function(){
+        nextOnClick.disabled = true
         console.log('Vamos recarregar a página pra você, um instante...')
         setInterval(function() {
             console.log('Preparando...')
@@ -137,7 +157,10 @@ function playerWins(experience){
 
     }
 }
+//End.
 
+
+//Battle functions.
 function playerLost(){
     soundDefeat()
     const element = document.getElementById('log')
@@ -154,6 +177,7 @@ function playerMisses(){
     const element = document.getElementById('log')
     const node = document.createElement('p')
     node.classList.add('p')
+    node.classList.add('Critical')
     const textnode = document.createTextNode(`Você errou!`)
     node.appendChild(textnode)
     element.appendChild(node), node.appendChild(textnode)
@@ -213,10 +237,11 @@ function battle() {
 
 function playerTurn() {
     damage = 0
-    damage = Math.floor(Math.random() * 20)
+    damage = Math.floor(Math.random() * 30) + playerObject.attack
     critical = 0
-    critical = Math.floor(Math.random() * (30 - 15)) + playerObject.luck;
-        if(critical >= 15){
+    critical = Math.floor(Math.random() * (50 - 20)) + playerObject.luck;
+    console.log(critical)
+        if(critical >= 24){
             enemyObject.hp -= (damage + critical)
             console.log(`Você causou dano crítico! ${damage + critical} de dano.`)
             playerCriticalHit(damage, critical)
@@ -236,10 +261,11 @@ function playerTurn() {
 
 function enemyTurn() {
     damage = 0
-    damage = Math.floor(Math.random() * 6)
+    damage = Math.floor(Math.random() * 30) + enemyObject.attack
     critical = 0
-    critical = Math.floor(Math.random() * (30 - 15)) + enemyObject.luck;
-        if(critical >= 15){
+    critical = Math.floor(Math.random() * (50 - 20)) + enemyObject.luck;
+    console.log(`Dano crítico contabilizado ${critical}`)
+        if(critical >= 24){
             playerObject.hp -= (damage + critical)
             console.log(`Você recebeu dano crítico! ${damage + critical} de dano.`)
             enemyCriticalHit(damage, critical)
@@ -256,22 +282,26 @@ function enemyTurn() {
             return playerTurn
         }
 }
+//End.
 
+//Another.
 function rest() {
     console.log('Descansando...aguarde alguns instantes.')
+    resting.disabled = true
     setTimeout(function() {
         fulfill()
-    }, 3000) 
+    }, 2000) 
 }
 
 function fulfill() {
     soundRecovery()
     playerObject.hp = 100
-    console.log(`Sua vida atual ${playerObject.hp}`)
-    resting.disabled = true 
+    enemyObject.hp = 100
+    console.log(`Sua vida atual ${playerObject.hp}`) 
     start.disabled = false
     return 
 }
+//End.
 
 
 
